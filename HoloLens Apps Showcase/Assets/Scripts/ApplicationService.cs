@@ -28,7 +28,7 @@ public class ApplicationService : MonoBehaviour {
 
         for (int i = 0; i < 5; i++)
         {
-            Vector3 pos = new Vector3(0, 0.5f, i);
+            Vector3 pos = new Vector3(0, 0.25f, i*0.5f);
             Instantiate(train, pos,quat);
         }
 
