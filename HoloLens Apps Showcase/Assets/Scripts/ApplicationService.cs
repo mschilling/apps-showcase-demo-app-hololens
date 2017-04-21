@@ -28,8 +28,8 @@ public class ApplicationService : MonoBehaviour {
 
         for (int i = 0; i < 5; i++)
         {
-            Vector3 pos = new Vector3(1, 0.6f*i, 0.5f);
-            Instantiate(train, pos,quat).transform.localScale.Set(0.2f,0.2f,0.2f);
+            Vector3 pos = new Vector3(0, 0.5f, i);
+            Instantiate(train, pos,quat);
         }
 
 
