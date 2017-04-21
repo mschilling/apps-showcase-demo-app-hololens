@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 115683937}
   - component: {fileID: 115683942}
   - component: {fileID: 115683943}
+  - component: {fileID: 115683944}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -318,7 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e689ed966eb3ad04a9b4bd1681ddf7b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beaconManager: {fileID: 115683943}
 --- !u!114 &115683943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +330,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfeb79fe58fc70469e3508414ca5a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cube: {fileID: 0}
+--- !u!114 &115683944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 115683936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6826ab81aaa4ea45977a247a0961f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  train: {fileID: 1883193030}
 --- !u!1 &135470394
 GameObject:
   m_ObjectHideFlags: 0
@@ -6208,7 +6219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4414ab7cd3d674b449d233db0d583605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extinguishSounds: []
 --- !u!23 &1941336298
 MeshRenderer:
   m_ObjectHideFlags: 0

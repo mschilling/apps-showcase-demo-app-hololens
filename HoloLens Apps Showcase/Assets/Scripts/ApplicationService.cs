@@ -9,6 +9,8 @@ public class ApplicationService : MonoBehaviour {
     private String results;
     private Application[] applications;
 
+    public GameObject train;
+
     public String Results
     {
         get
@@ -19,7 +21,20 @@ public class ApplicationService : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        x = GET("http://singleuseapps.com/apps/api/v1/customers/60/projects/103/applications", processData);
+        // x = GET("http://singleuseapps.com/apps/api/v1/customers/60/projects/103/applications", processData);
+        // x = GET("https://jsonplaceholder.typicode.com/users", processData);
+
+        Quaternion quat = new Quaternion();
+
+        for (int i = 0; i < 5; i++)
+        {
+            Vector3 pos = new Vector3(1, 0.6f*i, 0.5f);
+            Instantiate(train, pos,quat).transform.localScale.Set(0.2f,0.2f,0.2f);
+        }
+
+
+        Instantiate(train);
+        
     }
 
     // Update is called once per frame
