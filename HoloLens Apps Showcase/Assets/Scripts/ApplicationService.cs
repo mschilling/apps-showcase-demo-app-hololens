@@ -6,8 +6,8 @@ using UnityEngine;
 public class ApplicationService : MonoBehaviour {
 
     private WWW x;
-    private String results;
-    private Application[] applications;
+    private string results;
+    //private Application[] applications;
 
     public GameObject train;
 
@@ -21,7 +21,7 @@ public class ApplicationService : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        // x = GET("http://singleuseapps.com/apps/api/v1/customers/60/projects/103/applications", processData);
+         x = GET("http://singleuseapps.com:8080/apps/api/v1/customers/12/projects/92/applications", processData);
         // x = GET("https://jsonplaceholder.typicode.com/users", processData);
 
         Quaternion quat = new Quaternion();
@@ -46,11 +46,9 @@ public class ApplicationService : MonoBehaviour {
     void processData()
     {
         Debug.Log(x.text);
-        for (int i = 0; i < 5; i++)
-        {
-            Quaternion q = new Quaternion();
-            // Instantiate(Cube,new Vector3(0,i,i+2),q);   
-        }
+        AppObj[] data = getJsonArray<AppObj>(x.text);
+
+
     }
 
     public static T[] getJsonArray<T>(string json)
@@ -70,18 +68,29 @@ public class ApplicationService : MonoBehaviour {
 
     private class Wrapper<T>
     {
-        public T[] array;
+        public T[] array { get; set; }
     }
 
-    private class Application
+    public struct AppObj
     {
         public long id { get; set; }
+        public long projectid { get; set; }
+        public long uploaddate { get; set; }
+        public string version { get; set; }
+        public string platform { get; set; }
+        public string environment { get; set; }
         public string filename { get; set; }
+        public string path { get; set; }
+
+
+
     }
 
     public WWW GET(string url, System.Action onComplete)
     {
-        WWW www = new WWW(url);
+        Dictionary<string, string> headers = new Dictionary<string, string>();
+        headers.Add("Authorization", "los4kss5kl3b73pn8evhiieg2c");
+        WWW www = new WWW(url,null,headers);
         StartCoroutine(WaitForRequest(www, onComplete));
         return www;
     }
@@ -92,18 +101,21 @@ public class ApplicationService : MonoBehaviour {
         // check for errors
         if (www.error == null)
         {
+            Debug.Log("Success");
             results = www.text;
-            applications = getJsonArray<Application>(www.text);
+            //applications = getJsonArray<Application>(www.text);
 
-            foreach(Application application in applications)
-            {
-                Debug.Log(application.filename);
-            }
+            //foreach(Application application in applications)
+            //{
+            //    Debug.Log(application.filename);
+            //}
 
             onComplete();
         }
         else
         {
+
+            Debug.Log("Failure");
             Debug.Log(www.error);
         }
     }
