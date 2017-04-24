@@ -46,17 +46,33 @@ public class ApplicationService : MonoBehaviour {
     void processData()
     {
         Debug.Log(x.text);
-        AppObj[] data = getJsonArray<AppObj>(x.text);
+        AppObject[] apps = getJsonArray(x.text);
+
+       
+    }
+
+    [Serializable]
+    public class AppObject
+    {
+        public long id;
+        public long projectid;
+        public long uploaddate;
+        public string version;
+        public string platform;
+        public string environment;
+        public string filename;
+        public string path;
 
 
     }
 
-    public static T[] getJsonArray<T>(string json)
+
+    public static AppObject[] getJsonArray(string json)
     {
         string newJson = "{ \"array\": " + json + "}";
         try
         {
-            Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(newJson);
+            AppWrapper wrapper = JsonUtility.FromJson<AppWrapper>(newJson);
             return wrapper.array;
         }
         catch (Exception e)
@@ -66,26 +82,20 @@ public class ApplicationService : MonoBehaviour {
         }
     }
 
-    private class Wrapper<T>
+    public class Wrapper<T>
     {
-        public T[] array { get; set; }
+        public T[] array;
     }
 
-    public struct AppObj
+    [Serializable]
+    public class AppWrapper : Wrapper<AppObject>
     {
-        public long id { get; set; }
-        public long projectid { get; set; }
-        public long uploaddate { get; set; }
-        public string version { get; set; }
-        public string platform { get; set; }
-        public string environment { get; set; }
-        public string filename { get; set; }
-        public string path { get; set; }
-
-
 
     }
 
+
+
+   
     public WWW GET(string url, System.Action onComplete)
     {
         Dictionary<string, string> headers = new Dictionary<string, string>();
