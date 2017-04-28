@@ -47,7 +47,6 @@ public class ApplicationService : MonoBehaviour {
     {
         Debug.Log(x.text);
         AppObject[] apps = getJsonArray(x.text);
-
        
     }
 
