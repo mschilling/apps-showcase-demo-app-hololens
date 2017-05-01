@@ -10,6 +10,10 @@ public class ApplicationService : MonoBehaviour {
     //private Application[] applications;
 
     public GameObject coupe;
+    public GameObject train;
+
+    private GameObject[] treintjes = new GameObject[6];
+
 
     public String Results
     {
@@ -26,18 +30,35 @@ public class ApplicationService : MonoBehaviour {
 
         Quaternion quat = new Quaternion();
 
+        Vector3 posTrain = new Vector3(0, 0, 0);
+        treintjes[0] = train;
+
         for (int i = 0; i < 5; i++)
         {
             Vector3 pos = new Vector3(-0.5f*i-0.5f, 0.04f, 0);
-            Instantiate(coupe, pos,quat);
+            treintjes[i+1]= Instantiate(coupe, pos,quat);
         }        
     }
 
     // Update is called once per frame
     void Update () {
-        Vector3 r = new Vector3(-0.01f, 0, 0);
-        coupe.transform.TransformVector(r);
-	}
+        foreach (GameObject coupe in treintjes)
+        {
+            coupe.transform.Translate(0.050f, 0, 0);
+            findPath(coupe);
+        }
+     }
+
+    void findPath(GameObject coupe)
+    {
+        var pos = coupe.transform.position;
+        if(pos.x > 4 || pos.x < -4)
+        {
+            coupe.transform.Rotate(0, 2f, 0);
+        }      
+
+
+    }
 
 
     void processData()
