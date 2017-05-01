@@ -9,7 +9,7 @@ public class ApplicationService : MonoBehaviour {
     private string results;
     //private Application[] applications;
 
-    public GameObject train;
+    public GameObject coupe;
 
     public String Results
     {
@@ -28,18 +28,15 @@ public class ApplicationService : MonoBehaviour {
 
         for (int i = 0; i < 5; i++)
         {
-            Vector3 pos = new Vector3(0, 0.25f, i*0.5f);
-            Instantiate(train, pos,quat);
-        }
-
-
-        Instantiate(train);
-        
+            Vector3 pos = new Vector3(-0.5f*i-0.5f, 0.04f, 0);
+            Instantiate(coupe, pos,quat);
+        }        
     }
 
     // Update is called once per frame
     void Update () {
-		
+        Vector3 r = new Vector3(-0.01f, 0, 0);
+        coupe.transform.TransformVector(r);
 	}
 
 
