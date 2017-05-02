@@ -27,9 +27,10 @@ public class ApplicationService : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-         x = GET("http://singleuseapps.com:8080/apps/api/v1/customers/12/projects/92/applications", processData);
-        // x = GET("https://jsonplaceholder.typicode.com/users", processData);
-
+        // Coders: 60 / 103
+        // MyDial Ionic: 12 / 100
+        // Bite:    12 / 92
+         x = GET("http://singleuseapps.com:8080/apps/api/v1/customers/60/projects/103/applications", processData);
     }
 
     // Update is called once per frame
@@ -51,8 +52,6 @@ public class ApplicationService : MonoBehaviour {
         {
             coupe.transform.Rotate(0, 2f, 0);
         }      
-
-
     }
 
 
@@ -64,16 +63,14 @@ public class ApplicationService : MonoBehaviour {
         treintjes = new GameObject[apps.Length + 1]; // +1 for loco
 
         Quaternion quat = new Quaternion();
-
         Vector3 posTrain = new Vector3(0, 0, 0);
-        treintjes[0] = train;
+        treintjes[0] = train;                       // Loco in the front
 
         for (int i = 0; i < apps.Length; i++)
         {
             Vector3 pos = new Vector3(-0.5f * i - 0.5f, 0.04f, 0);
             treintjes[i + 1] = Instantiate(coupe, pos, quat);
         }
-
         isLoaded = true;
     }
 
