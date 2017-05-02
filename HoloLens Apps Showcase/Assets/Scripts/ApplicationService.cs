@@ -14,6 +14,8 @@ public class ApplicationService : MonoBehaviour {
 
     private GameObject[] treintjes = new GameObject[6];
 
+    private bool isLoaded = false;
+
 
     public String Results
     {
@@ -28,24 +30,17 @@ public class ApplicationService : MonoBehaviour {
          x = GET("http://singleuseapps.com:8080/apps/api/v1/customers/12/projects/92/applications", processData);
         // x = GET("https://jsonplaceholder.typicode.com/users", processData);
 
-        Quaternion quat = new Quaternion();
-
-        Vector3 posTrain = new Vector3(0, 0, 0);
-        treintjes[0] = train;
-
-        for (int i = 0; i < 5; i++)
-        {
-            Vector3 pos = new Vector3(-0.5f*i-0.5f, 0.04f, 0);
-            treintjes[i+1]= Instantiate(coupe, pos,quat);
-        }        
     }
 
     // Update is called once per frame
     void Update () {
-        foreach (GameObject coupe in treintjes)
+        if (isLoaded)
         {
-            coupe.transform.Translate(0.050f, 0, 0);
-            findPath(coupe);
+            foreach (GameObject coupe in treintjes)
+            {
+                coupe.transform.Translate(0.050f, 0, 0);
+                findPath(coupe);
+            }
         }
      }
 
@@ -65,7 +60,21 @@ public class ApplicationService : MonoBehaviour {
     {
         Debug.Log(x.text);
         AppObject[] apps = getJsonArray(x.text);
-       
+
+        treintjes = new GameObject[apps.Length + 1]; // +1 for loco
+
+        Quaternion quat = new Quaternion();
+
+        Vector3 posTrain = new Vector3(0, 0, 0);
+        treintjes[0] = train;
+
+        for (int i = 0; i < apps.Length; i++)
+        {
+            Vector3 pos = new Vector3(-0.5f * i - 0.5f, 0.04f, 0);
+            treintjes[i + 1] = Instantiate(coupe, pos, quat);
+        }
+
+        isLoaded = true;
     }
 
     [Serializable]
