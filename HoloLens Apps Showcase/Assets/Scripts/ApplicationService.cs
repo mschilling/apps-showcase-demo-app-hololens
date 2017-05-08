@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using HoloToolkit.Unity.InputModule;
 
 public class ApplicationService : MonoBehaviour {
 
@@ -39,6 +40,7 @@ public class ApplicationService : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
         if (isLoaded)
         {
             foreach (GameObject coupe in treintjes)
