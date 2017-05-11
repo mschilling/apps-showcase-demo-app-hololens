@@ -6847,6 +6847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coupe: {fileID: 1766292023}
   train: {fileID: 511441316}
+  jsonScript: {fileID: 0}
 --- !u!1 &1225266814
 GameObject:
   m_ObjectHideFlags: 0
@@ -8158,6 +8159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coupe: {fileID: 1766292023}
   train: {fileID: 511441316}
+  jsonScript: {fileID: 0}
 --- !u!1001 &1437743488
 Prefab:
   m_ObjectHideFlags: 0
@@ -10720,6 +10722,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1766292024}
+  - component: {fileID: 1766292025}
   m_Layer: 0
   m_Name: Coupe (1)
   m_TagString: Untagged
@@ -10749,6 +10752,18 @@ Transform:
   m_Father: {fileID: 511441317}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1766292025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1766292023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7311e07af8a799a4fb27972628f339f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlay: {fileID: 1910640900}
 --- !u!1 &1772384790
 GameObject:
   m_ObjectHideFlags: 0
