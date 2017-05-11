@@ -6,43 +6,31 @@ using HoloToolkit.Unity.InputModule;
 
 public class ApplicationService : MonoBehaviour {
 
-    private WWW x;
+    private WWW[] requests = new WWW[5];
+    private bool[] completed = new bool[5];
     private string results;
-    //private Application[] applications;
 
     public GameObject coupe;
     public GameObject train;
 
     private GameObject[] treintjes = new GameObject[6];
-
-    private bool isLoaded = false;
+    private bool isLoaded = false;                                          // When isLoaded animation starts
 
     private Customer[] customers = new Customer[0];                         // Customer array with initial size 0
-
-    private string getAppsUrl = "http://singleuseapps.com:8080/apps/api/v1/customers/60/projects/103/applications";
-    private string deviceApiUrl = "http://192.168.13.61/upload.php?id=12&projectid=92&applicationid=2&filename=android-debug.apk";
-
-
-    public String Results
-    {
-        get
-        {
-            return results;
-        }
-    }
 
     // Use this for initialization
     void Start () {
         // Coders: 60 / 103
         // MyDial Ionic: 12 / 100
         // Bite:    12 / 92
-         x = GET(deviceApiUrl, processData);
+    
+         requests[0] = GET(Config.generateAppsurl(12,92), processData);
+         requests[1] = GET(Config.generateAppsurl(12,100), processSecond);
       //  WWW y = GET(deviceApiUrl, processData);
     }
 
     // Update is called once per frame
     void Update () {
-
         if (isLoaded)
         {
             foreach (GameObject coupe in treintjes)
@@ -62,43 +50,37 @@ public class ApplicationService : MonoBehaviour {
         }      
     }
 
-
     void processData()
     {
+        startProcess(0);
+    }
 
-        //Debug.Log(x.text);
-        //AppObject[] apps = getJsonArray(x.text);
+    void processSecond()
+    {
+        startProcess(1);
+    }
 
-        //treintjes = new GameObject[apps.Length + 1]; // +1 for loco
 
-        //Quaternion quat = new Quaternion();
-        //Vector3 posTrain = new Vector3(0, 0, 0);
-        treintjes = new GameObject[1];
+    void startProcess(int index)
+    {
+        Debug.Log(requests[index].text);
+        AppObject[] apps = getJsonArray(requests[index].text);
+
+        treintjes = new GameObject[apps.Length + 1]; // +1 for loco
+
+        Quaternion quat = new Quaternion();
+        Vector3 posTrain = new Vector3(0, 0, 0);
         treintjes[0] = train;                       // Loco in the front
 
-        //for (int i = 0; i < apps.Length; i++)
-        //{
-        //    Vector3 pos = new Vector3(-0.5f * i - 0.5f, 0.04f, 0);
-        //    treintjes[i + 1] = Instantiate(coupe, pos, quat);
-        //}
+        for (int i = 0; i < apps.Length; i++)
+        {
+            Vector3 pos = new Vector3(-0.5f * i - 0.5f, 0.04f, 0);
+            treintjes[i + 1] = Instantiate(coupe, pos, quat);
+        }
         isLoaded = true;
     }
 
-    [Serializable]
-    public class AppObject
-    {
-        public long id;
-        public long projectid;
-        public long uploaddate;
-        public string version;
-        public string platform;
-        public string environment;
-        public string filename;
-        public string path;
-
-
-    }
-
+  
 
     public static AppObject[] getJsonArray(string json)
     {
