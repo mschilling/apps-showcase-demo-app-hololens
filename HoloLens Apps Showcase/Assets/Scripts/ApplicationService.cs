@@ -17,6 +17,8 @@ public class ApplicationService : MonoBehaviour {
 
     private bool isLoaded = false;
 
+    private Customer[] customers = new Customer[0];                         // Customer array with initial size 0
+
     private string getAppsUrl = "http://singleuseapps.com:8080/apps/api/v1/customers/60/projects/103/applications";
     private string deviceApiUrl = "http://192.168.13.61/upload.php?id=12&projectid=92&applicationid=2&filename=android-debug.apk";
 

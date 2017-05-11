@@ -6,6 +6,7 @@ using HoloToolkit.Unity.InputModule;
 public class ObjectSelectionHandler : MonoBehaviour,IInputClickHandler {
 
     private bool isDriving = false;
+    public GameObject overlay;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class ObjectSelectionHandler : MonoBehaviour,IInputClickHandler {
     {
         Debug.Log("Train tapped");
         isDriving = !isDriving;
+        overlay.SetActive(!isDriving);
        
     }
 
