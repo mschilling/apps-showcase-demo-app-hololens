@@ -17,6 +17,7 @@ public class ApplicationService : MonoBehaviour {
     private bool isLoaded = false;                                          // When isLoaded animation starts
 
     private Customer[] customers = new Customer[0];                         // Customer array with initial size 0
+    private Project[] projects = new Project[0];
 
     // Use this for initialization
     void Start () {
@@ -33,22 +34,13 @@ public class ApplicationService : MonoBehaviour {
     void Update () {
         if (isLoaded)
         {
-            foreach (GameObject coupe in treintjes)
+           foreach(Project p in projects)
             {
-                coupe.transform.Translate(0.050f, 0, 0);
-                findPath(coupe);
+                p.update();
             }
         }
      }
 
-    void findPath(GameObject coupe)
-    {
-        var pos = coupe.transform.position;
-        if(pos.x > 4 || pos.x < -4)
-        {
-            coupe.transform.Rotate(0, 2f, 0);
-        }      
-    }
 
     void processData()
     {
