@@ -19,15 +19,24 @@ public class ApplicationService : MonoBehaviour {
     private Customer[] customers = new Customer[0];                         // Customer array with initial size 0
     private Project[] projects = new Project[0];
 
-    public JsonScript jsonScript; 
+    public JsonScript jsonScript;
+
+    public GazeManager gazeManager;
+
+    private GameObject focusedObject;
 
     // Use this for initialization
     void Start () {
         // Coders: 60 / 103
         // MyDial Ionic: 12 / 100
         // Bite:    12 / 92
-         requests[0] = jsonScript.GET(Config.generateAppsurl(12,92), processData);
-         requests[1] = jsonScript.GET(Config.generateAppsurl(12,100), processSecond);
+        jsonScript = new JsonScript();
+        //gazeManager = new GazeManager();
+        requests[0] = jsonScript.GET(Config.generateAppsurl(12,92), processData);
+        requests[1] = jsonScript.GET(Config.generateAppsurl(12,100), processSecond);
+
+        StartCoroutine(WaitForRequest(requests[0], processData));
+        StartCoroutine(WaitForRequest(requests[1], processSecond));
     }
 
     // Update is called once per frame
@@ -38,6 +47,17 @@ public class ApplicationService : MonoBehaviour {
             {
                 p.update();
             }
+        }
+
+        if (gazeManager.IsGazingAtObject)
+        {
+            GameObject focussed = gazeManager.HitObject;
+            if(focussed != focusedObject)
+            {
+                focusedObject = focussed;
+                
+            }
+          //  Debug.Log("Focussed");
         }
      }
 
@@ -68,8 +88,34 @@ public class ApplicationService : MonoBehaviour {
         {
             Vector3 pos = new Vector3(-0.5f * i - 0.5f, 0.04f, 0);
             treintjes[i + 1] = Instantiate(coupe, pos, quat);
+            treintjes[i + 1].SetActive(true);
         }
         isLoaded = true;
+    }
+
+    private IEnumerator WaitForRequest(WWW www, System.Action onComplete)
+    {
+        yield return www;
+        // check for errors
+        if (www.error == null)
+        {
+            Debug.Log("Success");
+            results = www.text;
+            //applications = getJsonArray<Application>(www.text);
+
+            //foreach(Application application in applications)
+            //{
+            //    Debug.Log(application.filename);
+            //}
+
+            onComplete();
+        }
+        else
+        {
+
+            Debug.Log("Failure");
+            Debug.Log(www.error);
+        }
     }
 
 }

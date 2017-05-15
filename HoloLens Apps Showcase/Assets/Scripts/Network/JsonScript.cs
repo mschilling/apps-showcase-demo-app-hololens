@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using HoloToolkit.Unity.InputModule;
 
-public class JsonScript : MonoBehaviour {
+public class JsonScript {
 
     private string results;
 
@@ -50,7 +50,6 @@ public class JsonScript : MonoBehaviour {
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Authorization", "los4kss5kl3b73pn8evhiieg2c");
         WWW www = new WWW(url, null, headers);
-        StartCoroutine(WaitForRequest(www, onComplete));
         return www;
     }
 
@@ -66,32 +65,8 @@ public class JsonScript : MonoBehaviour {
 
         WWW www = new WWW(url, form);
 
-        StartCoroutine(WaitForRequest(www, onComplete));
         return www;
     }
 
-    private IEnumerator WaitForRequest(WWW www, System.Action onComplete)
-    {
-        yield return www;
-        // check for errors
-        if (www.error == null)
-        {
-            Debug.Log("Success");
-            results = www.text;
-            //applications = getJsonArray<Application>(www.text);
-
-            //foreach(Application application in applications)
-            //{
-            //    Debug.Log(application.filename);
-            //}
-
-            onComplete();
-        }
-        else
-        {
-
-            Debug.Log("Failure");
-            Debug.Log(www.error);
-        }
-    }
+   
 }
