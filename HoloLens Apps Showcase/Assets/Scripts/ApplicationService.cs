@@ -21,7 +21,6 @@ public class ApplicationService : MonoBehaviour {
 
     public JsonScript jsonScript;
     public GazeManager gazeManager;
-    private GameObject focusedObject;
 
    // public GameObject gazeMenu;
 
@@ -49,17 +48,7 @@ public class ApplicationService : MonoBehaviour {
             }
         }
 
-        if (gazeManager.IsGazingAtObject)
-        {
-            GameObject focussed = gazeManager.HitObject;
-            if(focussed != focusedObject)
-            {
-                focusedObject = focussed;
-                //Instantiate(gazeMenu, focusedObject.transform);
-                
-            }
-          //  Debug.Log("Focussed");
-        }
+
      }
 
 
