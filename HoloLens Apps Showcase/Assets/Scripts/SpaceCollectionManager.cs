@@ -101,7 +101,6 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
                 SurfacePlane plane = surface.GetComponent<SurfacePlane>();
                 position = surface.transform.position + (plane.PlaneThickness * plane.SurfaceNormal);
                 position = AdjustPositionWithSpatialMap(position, plane.SurfaceNormal);
-                position.y = position.y + 1;
                 rotation = Camera.main.transform.localRotation;
 
                 if (surfaceType == PlacementSurfaces.Vertical)
