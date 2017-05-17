@@ -20,10 +20,10 @@ public class ApplicationService : MonoBehaviour {
     private Project[] projects = new Project[0];
 
     public JsonScript jsonScript;
-
     public GazeManager gazeManager;
-
     private GameObject focusedObject;
+
+   // public GameObject gazeMenu;
 
     // Use this for initialization
     void Start () {
@@ -55,6 +55,7 @@ public class ApplicationService : MonoBehaviour {
             if(focussed != focusedObject)
             {
                 focusedObject = focussed;
+                //Instantiate(gazeMenu, focusedObject.transform);
                 
             }
           //  Debug.Log("Focussed");
