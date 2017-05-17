@@ -2933,6 +2933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 511441317}
   - component: {fileID: 511441318}
+  - component: {fileID: 511441319}
   m_Layer: 0
   m_Name: Train
   m_TagString: Untagged
@@ -2967,6 +2968,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overlay: {fileID: 0}
+--- !u!114 &511441319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 511441316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836daacb00d7d8042834e5a2bcda56de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlaceableBoundsMaterial: {fileID: 0}
+  NotPlaceableBoundsMaterial: {fileID: 0}
+  PlaceableShadowMaterial: {fileID: 0}
+  NotPlaceableShadowMaterial: {fileID: 0}
+  PlacementSurface: 1
+  ChildrenToHide: []
 --- !u!1 &550602168
 GameObject:
   m_ObjectHideFlags: 0
@@ -8174,6 +8192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spaceObjectPrefabs:
   - {fileID: 1959409802343654, guid: d4776e86c09017c428cc4b076e2751b9, type: 2}
+  - {fileID: 511441316}
 --- !u!114 &1418181054
 MonoBehaviour:
   m_ObjectHideFlags: 0

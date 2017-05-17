@@ -12,6 +12,7 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
 {
     [Tooltip("A collection of Placeable space object prefabs to generate in the world.")]
     public List<GameObject> spaceObjectPrefabs;
+    public GameObject train;
 
     /// <summary>
     /// Generates a collection of Placeable objects in the world and sets them on planes that match their affinity.
