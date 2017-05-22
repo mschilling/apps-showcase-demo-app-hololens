@@ -153,7 +153,7 @@ public class ApplicationService : MonoBehaviour {
 
         Vector3 posLoco = locos[0].transform.position;
 
-        Quaternion quat = new Quaternion();
+        Quaternion quat = locos[0].transform.rotation;
         for (int i = 0; i < treintjes[0].Length; i++)
         {
             Vector3 pos = new Vector3(-0.5f * i - 0.5f + posLoco.x, 0.04f + posLoco.y, 0 + posLoco.z);
