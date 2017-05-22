@@ -8,6 +8,7 @@ public class Project{
     public float originalX;
     public float x, y, z;
     public GameObject coupe;
+    public AppObject[] apps;
 
 
     public void update()

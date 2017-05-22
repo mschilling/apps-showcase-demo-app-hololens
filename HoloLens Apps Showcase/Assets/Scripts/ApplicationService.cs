@@ -10,10 +10,12 @@ public class ApplicationService : MonoBehaviour {
     private bool[] completed = new bool[5];
     private string results;
 
-    public GameObject coupe;
-    public GameObject train;
+    public GameObject coupe;                                                // Used to generate the projects from code
+    public GameObject train;                                                // Public so object can be added from Unity Scene and used to generate objects here
 
-    private GameObject[] treintjes = new GameObject[6];
+    public GameObject[] locos = new GameObject[3];                          // First car of each train
+
+    private GameObject[][] treintjes = new GameObject[3][];
     private bool isLoaded = false;                                          // When isLoaded animation starts
 
     private Customer[] customers = new Customer[3];                         // Customer array with initial size 3: Move4Mobile (12), Widlands (46), Rabobank (20)
@@ -25,9 +27,6 @@ public class ApplicationService : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        // Coders: 60 / 103
-        // MyDial Ionic: 12 / 100
-        // Bite:    12 / 92
         fillCustomers();
         getData();
     }
@@ -48,6 +47,9 @@ public class ApplicationService : MonoBehaviour {
 
     void getData()
     {
+        // Coders: 60 / 103
+        // MyDial Ionic: 12 / 100
+        // Bite:    12 / 92
         jsonScript = new JsonScript();
         requests[0] = jsonScript.GET(Config.generateAppsurl(12, 92), processData);
         requests[1] = jsonScript.GET(Config.generateAppsurl(12, 100), processSecond);
@@ -68,6 +70,20 @@ public class ApplicationService : MonoBehaviour {
         customers[0] = m4m;
         customers[1] = wildlands;
         customers[2] = rabo;
+
+
+        // Create 3 trains
+        locos[0] = train;
+
+        Quaternion quat = new Quaternion();
+        Vector3 pos = new Vector3();
+        pos.x = 4;
+
+        Vector3 pos3 = new Vector3();
+        pos3.x = -4;
+       
+        locos[1] = Instantiate(train, pos, quat);
+        locos[2] = Instantiate(train, pos3, quat);
     }
 
     void fillProjects()
@@ -120,18 +136,27 @@ public class ApplicationService : MonoBehaviour {
     {
         Debug.Log(requests[index].text);
         AppObject[] apps = jsonScript.getJsonArray(requests[index].text);
+        switch (index)
+        {
+            case 0:
+                customers[0].projects[0].apps = apps;
+                break;
+            case 1:
+                customers[0].projects[2].apps = apps;
+                break;
 
-        treintjes = new GameObject[apps.Length + 1]; // +1 for loco
+            default:
+                break;
+        }
+
+        treintjes[0] = new GameObject[apps.Length + 1]; // +1 for loco
 
         Quaternion quat = new Quaternion();
-        Vector3 posTrain = new Vector3(0, 0, 0);
-        treintjes[0] = train;                       // Loco in the front
-
         for (int i = 0; i < apps.Length; i++)
         {
             Vector3 pos = new Vector3(-0.5f * i - 0.5f, 0.04f, 0);
-            treintjes[i + 1] = Instantiate(coupe, pos, quat);
-            treintjes[i + 1].SetActive(true);
+            treintjes[0][i + 1] = Instantiate(coupe, pos, quat);
+            treintjes[0][i + 1].SetActive(true);
         }
         isLoaded = true;
     }
@@ -139,23 +164,14 @@ public class ApplicationService : MonoBehaviour {
     private IEnumerator WaitForRequest(WWW www, System.Action onComplete)
     {
         yield return www;
-        // check for errors
         if (www.error == null)
         {
             Debug.Log("Success");
             results = www.text;
-            //applications = getJsonArray<Application>(www.text);
-
-            //foreach(Application application in applications)
-            //{
-            //    Debug.Log(application.filename);
-            //}
-
             onComplete();
         }
         else
         {
-
             Debug.Log("Failure");
             Debug.Log(www.error);
         }
