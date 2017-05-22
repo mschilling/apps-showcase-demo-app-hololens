@@ -28,7 +28,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1963187920038028
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,4 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 0}
+  mainCamera: {fileID: 0}
   gazeMenu: {fileID: 1952933420975028, guid: 32512de9edf2c114481fc661964f247a, type: 2}
+  applicationService: {fileID: 0}

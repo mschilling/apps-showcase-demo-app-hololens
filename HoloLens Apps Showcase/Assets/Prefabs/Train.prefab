@@ -2120,7 +2120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4567eb4198d1040bb0fed7c3d311ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlay: {fileID: 0}
+  overlay: {fileID: 1959409802343654, guid: d4776e86c09017c428cc4b076e2751b9, type: 2}
 --- !u!114 &114880464073592580
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,9 +13,11 @@ public class Project{
 
     public void update()
     {
-
-        coupe.transform.Translate(0.050f, 0, 0);
-        findPath();
+        if (coupe != null)
+        {
+            coupe.transform.Translate(0.050f, 0, 0);
+            findPath();
+        }
     }
 
     public void findPath()

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - InputManager
+  - Spatial
   layers:
   - Default
   - TransparentFX

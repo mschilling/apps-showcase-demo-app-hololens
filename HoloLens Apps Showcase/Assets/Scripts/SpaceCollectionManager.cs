@@ -14,6 +14,10 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     public List<GameObject> spaceObjectPrefabs;
     public GameObject train;
 
+    public List<GameObject> horizontalObjects = new List<GameObject>();
+
+   
+
     /// <summary>
     /// Generates a collection of Placeable objects in the world and sets them on planes that match their affinity.
     /// </summary>
@@ -21,7 +25,6 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     /// <param name="verticalSurfaces">Vertical surface planes (walls).</param>
     public void GenerateItemsInWorld(List<GameObject> horizontalSurfaces, List<GameObject> verticalSurfaces)
     {
-        List<GameObject> horizontalObjects = new List<GameObject>();
         List<GameObject> verticalObjects = new List<GameObject>();
 
         horizontalObjects.Add(train);
@@ -49,6 +52,11 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
         {
             CreateSpaceObjects(verticalObjects, verticalSurfaces, PlacementSurfaces.Vertical);
         }
+    }
+
+    public List<GameObject> getLocos()
+    {
+        return horizontalObjects;
     }
 
     /// <summary>
@@ -124,6 +132,10 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
             GameObject spaceObject = Instantiate(item, position, rotation) as GameObject;
             spaceObject.transform.parent = gameObject.transform;
         }
+
+        GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        ApplicationService applicationService = mainCamera.GetComponent<ApplicationService>();
+        applicationService.spatialMappingCompleted();
     }
 
     /// <summary>

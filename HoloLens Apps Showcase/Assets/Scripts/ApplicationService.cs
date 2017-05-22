@@ -69,19 +69,11 @@ public class ApplicationService : MonoBehaviour {
 
 
         // Create 3 trains
+        GameObject spatial = GameObject.FindGameObjectWithTag("Spatial");
+        SpaceCollectionManager manager = spatial.GetComponent<SpaceCollectionManager>();
+        locos = manager.getLocos().ToArray();
 
-        Quaternion quat = new Quaternion();
-        Vector3 position = new Vector3();
-
-        Vector3 pos = new Vector3();
-        pos.x = 4;
-
-        Vector3 pos3 = new Vector3();
-        pos3.x = -4;
-
-        locos[0] = Instantiate(train, position, quat);
-        locos[1] = Instantiate(train, pos, quat);
-        locos[2] = Instantiate(train, pos3, quat);
+        fillProjects();
     }
 
     void fillProjects()
@@ -116,6 +108,8 @@ public class ApplicationService : MonoBehaviour {
         Project wildlands = new Project();
         wildlands.name = "Wildlands";
         wildlandProjects[0] = wildlands;
+
+        customers[2].projects = wildlandProjects;
     }
 
 
@@ -138,6 +132,8 @@ public class ApplicationService : MonoBehaviour {
         {
             case 0:
                 customers[0].projects[0].apps = apps;
+                treintjes[0] = new GameObject[apps.Length]; // +1 for loco
+
                 break;
             case 1:
                 customers[0].projects[2].apps = apps;
@@ -147,18 +143,25 @@ public class ApplicationService : MonoBehaviour {
                 break;
         }
 
-        treintjes[0] = new GameObject[apps.Length + 1]; // +1 for loco
-
-        Quaternion quat = new Quaternion();
-        for (int i = 0; i < apps.Length; i++)
-        {
-            Vector3 pos = new Vector3(-0.5f * i - 0.5f, 0.04f, 0);
-            treintjes[0][i + 1] = Instantiate(coupe, pos, quat);
-            treintjes[0][i + 1].SetActive(true);
-        }
-        isLoaded = true;
     }
 
+    public void spatialMappingCompleted()
+    {
+        GameObject spatial = GameObject.FindGameObjectWithTag("Spatial");
+        SpaceCollectionManager manager = spatial.GetComponent<SpaceCollectionManager>();
+        locos = manager.getLocos().ToArray();
+
+        Vector3 posLoco = locos[0].transform.position;
+
+        Quaternion quat = new Quaternion();
+        for (int i = 0; i < treintjes[0].Length; i++)
+        {
+            Vector3 pos = new Vector3(-0.5f * i - 0.5f + posLoco.x, 0.04f + posLoco.y, 0 + posLoco.z);
+            treintjes[0][i] = Instantiate(coupe, pos, quat);
+        }
+        isLoaded = true;
+
+    }
     public void setGazedObject(GameObject gazeObject)
     {
         Debug.Log("GazeObject changed at ApplicationService");

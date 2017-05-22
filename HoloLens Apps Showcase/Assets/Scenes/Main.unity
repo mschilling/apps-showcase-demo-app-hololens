@@ -201,9 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6826ab81aaa4ea45977a247a0961f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coupe: {fileID: 0}
-  train: {fileID: 0}
-  gazeManager: {fileID: 2052116263}
+  coupe: {fileID: 1365721188274110, guid: 1c4e59303270a3c45a601fe1fe3dc84f, type: 2}
+  train: {fileID: 1123597841949752, guid: 5132bbbdc3622134ab4fdc441192e9e8, type: 2}
 --- !u!1001 &1239255867
 Prefab:
   m_ObjectHideFlags: 0
@@ -311,7 +310,7 @@ GameObject:
   - component: {fileID: 1418181051}
   m_Layer: 0
   m_Name: Spatial Processing
-  m_TagString: Untagged
+  m_TagString: Spatial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,6 +370,7 @@ MonoBehaviour:
   - {fileID: 1959409802343654, guid: d4776e86c09017c428cc4b076e2751b9, type: 2}
   - {fileID: 1123597841949752, guid: 5132bbbdc3622134ab4fdc441192e9e8, type: 2}
   train: {fileID: 1123597841949752, guid: 5132bbbdc3622134ab4fdc441192e9e8, type: 2}
+  horizontalObjects: []
 --- !u!114 &1418181054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,12 +532,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1437743488}
   m_Script: {fileID: 11500000, guid: b160d197a8ca1894796ae263bafec0ac, type: 3}
---- !u!114 &2052116263 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000012009196210, guid: 3eddd1c29199313478dd3f912bfab2ab,
-    type: 2}
-  m_PrefabInternal: {fileID: 1437743488}
-  m_Script: {fileID: 11500000, guid: 4d1a2a33ffcac354298137001635a001, type: 3}
 --- !u!1001 &2078794646
 Prefab:
   m_ObjectHideFlags: 0
