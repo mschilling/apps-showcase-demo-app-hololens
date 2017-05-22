@@ -14,7 +14,7 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     public List<GameObject> spaceObjectPrefabs;
     public GameObject train;
 
-    public List<GameObject> horizontalObjects = new List<GameObject>();
+    public List<GameObject> trains = new List<GameObject>();
 
    
 
@@ -25,6 +25,7 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     /// <param name="verticalSurfaces">Vertical surface planes (walls).</param>
     public void GenerateItemsInWorld(List<GameObject> horizontalSurfaces, List<GameObject> verticalSurfaces)
     {
+        List<GameObject> horizontalObjects = new List<GameObject>();
         List<GameObject> verticalObjects = new List<GameObject>();
 
         horizontalObjects.Add(train);
@@ -56,7 +57,7 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
 
     public List<GameObject> getLocos()
     {
-        return horizontalObjects;
+        return trains;
     }
 
     /// <summary>
@@ -131,6 +132,7 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
             //Vector3 finalPosition = AdjustPositionWithSpatialMap(position, surfaceType);
             GameObject spaceObject = Instantiate(item, position, rotation) as GameObject;
             spaceObject.transform.parent = gameObject.transform;
+            trains.Add(spaceObject);
         }
 
         GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
