@@ -166,4 +166,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e836e8be28b025247b202becca66c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gazeManager: {fileID: 0}
+  inputManager: {fileID: 0}
+  gazeMenu: {fileID: 1952933420975028, guid: 32512de9edf2c114481fc661964f247a, type: 2}

@@ -16,8 +16,7 @@ public class ApplicationService : MonoBehaviour {
     private GameObject[] treintjes = new GameObject[6];
     private bool isLoaded = false;                                          // When isLoaded animation starts
 
-    private Customer[] customers = new Customer[0];                         // Customer array with initial size 0
-    private Project[] projects = new Project[0];
+    private Customer[] customers = new Customer[3];                         // Customer array with initial size 3: Move4Mobile (12), Widlands (46), Rabobank (20)
 
     public JsonScript jsonScript;
     public GazeManager gazeManager;
@@ -29,27 +28,81 @@ public class ApplicationService : MonoBehaviour {
         // Coders: 60 / 103
         // MyDial Ionic: 12 / 100
         // Bite:    12 / 92
-        jsonScript = new JsonScript();
-        //gazeManager = new GazeManager();
-        requests[0] = jsonScript.GET(Config.generateAppsurl(12,92), processData);
-        requests[1] = jsonScript.GET(Config.generateAppsurl(12,100), processSecond);
-
-        StartCoroutine(WaitForRequest(requests[0], processData));
-        StartCoroutine(WaitForRequest(requests[1], processSecond));
+        fillCustomers();
+        getData();
     }
 
     // Update is called once per frame
     void Update () {
         if (isLoaded)
         {
-           foreach(Project p in projects)
+           foreach(Customer c in customers)
             {
-                p.update();
+                foreach (Project p in c.projects)
+                {
+                    p.update();
+                }
             }
         }
-
-
      }
+
+    void getData()
+    {
+        jsonScript = new JsonScript();
+        requests[0] = jsonScript.GET(Config.generateAppsurl(12, 92), processData);
+        requests[1] = jsonScript.GET(Config.generateAppsurl(12, 100), processSecond);
+
+        StartCoroutine(WaitForRequest(requests[0], processData));
+        StartCoroutine(WaitForRequest(requests[1], processSecond));
+    }
+
+    void fillCustomers()
+    {
+        Customer m4m = new Customer();
+        m4m.name = "Move4Mobile";
+        Customer wildlands = new Customer();
+        wildlands.name = "Wildlands";
+        Customer rabo = new Customer();
+        rabo.name = "Rabobank";
+
+        customers[0] = m4m;
+        customers[1] = wildlands;
+        customers[2] = rabo;
+    }
+
+    void fillProjects()
+    {
+        // M4M Projects
+        Project[] m4mprojects = new Project[3];
+
+        Project bite = new Project();
+        bite.name = "Bite";
+        Project coders = new Project();
+        coders.name = "Coders";
+        Project mydialionic = new Project();
+        mydialionic.name = "MyDialogues Ionic";
+
+        m4mprojects[0] = bite;
+        m4mprojects[1] = coders;
+        m4mprojects[2] = mydialionic;
+
+        customers[0].projects = m4mprojects;
+
+        // Rabo Projects
+        Project[] raboProjects = new Project[1];
+
+        Project smartpin = new Project();
+        smartpin.name = "Rabo SmartPin";
+        raboProjects[0] = smartpin;
+
+        customers[1].projects = raboProjects;
+
+        // Wildlands 
+        Project[] wildlandProjects = new Project[1];
+        Project wildlands = new Project();
+        wildlands.name = "Wildlands";
+        wildlandProjects[0] = wildlands;
+    }
 
 
     void processData()

@@ -31,6 +31,7 @@ public class OverlayGaze : MonoBehaviour {
                 Vector3 pos = gameObject.transform.position;
                 pos.z = pos.z + 0.01f;
 
+
                Quaternion q = gameObject.transform.rotation;
                
 
