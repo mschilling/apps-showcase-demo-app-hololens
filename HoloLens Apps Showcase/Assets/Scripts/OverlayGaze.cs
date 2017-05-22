@@ -8,6 +8,8 @@ public class OverlayGaze : MonoBehaviour {
 
     private GazeManager gazeManager;
     public GameObject inputManager;
+    public GameObject mainCamera;
+
     public GameObject gazeMenu;
     public ApplicationService applicationService;
 
@@ -17,6 +19,10 @@ public class OverlayGaze : MonoBehaviour {
         Debug.Log("Gazemanager: " + (gazeManager != null));
         inputManager = GameObject.FindGameObjectWithTag("InputManager");
         gazeManager = inputManager.GetComponent<GazeManager>();
+
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        applicationService = mainCamera.GetComponent<ApplicationService>();
+
         Debug.Log("Gazemanager: " + (gazeManager != null));
 	}
 	

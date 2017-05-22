@@ -7,25 +7,19 @@ using HoloToolkit.Unity.InputModule;
 public class ApplicationService : MonoBehaviour {
 
     private WWW[] requests = new WWW[5];
-    private bool[] completed = new bool[5];
-    private string results;
-
     public GameObject coupe;                                                // Used to generate the projects from code
     public GameObject train;                                                // Public so object can be added from Unity Scene and used to generate objects here
 
-    public GameObject[] locos = new GameObject[3];                          // First car of each train
+    private GameObject[] locos = new GameObject[3];                          // First car of each train
 
     private GameObject[][] treintjes = new GameObject[3][];
     private bool isLoaded = false;                                          // When isLoaded animation starts
 
     private Customer[] customers = new Customer[3];                         // Customer array with initial size 3: Move4Mobile (12), Widlands (46), Rabobank (20)
 
-    public JsonScript jsonScript;
-    public GazeManager gazeManager;
+    public JsonScript jsonScript;                                           // Script used to retrieve data via REST
 
-    private GameObject gazedObject = null;
-
-   // public GameObject gazeMenu;
+    private GameObject gazedObject = null;                                  // Hold reference to gazedObject to use for devicewall placement
 
     // Use this for initialization
     void Start () {
@@ -75,15 +69,17 @@ public class ApplicationService : MonoBehaviour {
 
 
         // Create 3 trains
-        locos[0] = train;
 
         Quaternion quat = new Quaternion();
+        Vector3 position = new Vector3();
+
         Vector3 pos = new Vector3();
         pos.x = 4;
 
         Vector3 pos3 = new Vector3();
         pos3.x = -4;
-       
+
+        locos[0] = Instantiate(train, position, quat);
         locos[1] = Instantiate(train, pos, quat);
         locos[2] = Instantiate(train, pos3, quat);
     }
@@ -189,7 +185,6 @@ public class ApplicationService : MonoBehaviour {
         if (www.error == null)
         {
             Debug.Log("Success");
-            results = www.text;
             onComplete();
         }
         else
