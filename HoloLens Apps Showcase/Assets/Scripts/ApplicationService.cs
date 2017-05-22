@@ -23,6 +23,8 @@ public class ApplicationService : MonoBehaviour {
     public JsonScript jsonScript;
     public GazeManager gazeManager;
 
+    private GameObject gazedObject = null;
+
    // public GameObject gazeMenu;
 
     // Use this for initialization
@@ -159,6 +161,26 @@ public class ApplicationService : MonoBehaviour {
             treintjes[0][i + 1].SetActive(true);
         }
         isLoaded = true;
+    }
+
+    public void setGazedObject(GameObject gazeObject)
+    {
+        Debug.Log("GazeObject changed at ApplicationService");
+        gazedObject = gazeObject;
+    }
+
+    public void placeApp()
+    {
+        foreach(Customer c in customers)
+        {
+            foreach(Project p in c.projects)
+            {
+                if(p.coupe == gazedObject)
+                {
+                    // place app
+                }
+            }
+        }
     }
 
     private IEnumerator WaitForRequest(WWW www, System.Action onComplete)

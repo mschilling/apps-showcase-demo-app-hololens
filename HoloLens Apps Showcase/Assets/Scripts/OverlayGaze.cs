@@ -9,6 +9,7 @@ public class OverlayGaze : MonoBehaviour {
     private GazeManager gazeManager;
     public GameObject inputManager;
     public GameObject gazeMenu;
+    public ApplicationService applicationService;
 
 	// Use this for initialization
 	void Start ()
@@ -26,17 +27,13 @@ public class OverlayGaze : MonoBehaviour {
             GameObject focussed = gazeManager.HitObject;
             if (focussed == gameObject)
             {
-               
                 Debug.Log("Focussed");
                 Vector3 pos = gameObject.transform.position;
                 pos.z = pos.z + 0.01f;
-
-
-               Quaternion q = gameObject.transform.rotation;
-               
-
+                Quaternion q = gameObject.transform.rotation;
                 Instantiate(gazeMenu, pos,q);
 
+                applicationService.setGazedObject(gameObject);
             }
         }
     }
