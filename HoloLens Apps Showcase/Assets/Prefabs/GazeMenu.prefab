@@ -105,6 +105,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4627395475708254}
+  - component: {fileID: 114054943436406166}
   m_Layer: 0
   m_Name: GazeMenu
   m_TagString: Untagged
@@ -535,3 +536,15 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &114054943436406166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952933420975028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352e99a42a279c94b999e359a1c30e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applicationService: {fileID: 0}

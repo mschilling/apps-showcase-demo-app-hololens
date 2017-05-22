@@ -177,9 +177,17 @@ public class ApplicationService : MonoBehaviour {
                 if(p.coupe == gazedObject)
                 {
                     // place app
+                    requests[2] = jsonScript.GET(Config.deviceApiUrl, placeAppCallBack);
+
+                    StartCoroutine(WaitForRequest(requests[2], placeAppCallBack));
                 }
             }
         }
+    }
+
+    void placeAppCallBack()
+    {
+        // feedback to user app is placed;
     }
 
     private IEnumerator WaitForRequest(WWW www, System.Action onComplete)

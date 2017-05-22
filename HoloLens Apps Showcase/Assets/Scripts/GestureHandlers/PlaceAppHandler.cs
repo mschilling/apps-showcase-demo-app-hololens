@@ -17,7 +17,8 @@ public class PlaceAppHandler : MonoBehaviour, IInputClickHandler
     }
     // Use this for initialization
     void Start () {
-		
+        GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        applicationService = mainCamera.GetComponent<ApplicationService>();
 	}
 	
 	// Update is called once per frame
