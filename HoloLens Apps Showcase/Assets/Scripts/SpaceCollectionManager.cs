@@ -24,6 +24,9 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
         List<GameObject> horizontalObjects = new List<GameObject>();
         List<GameObject> verticalObjects = new List<GameObject>();
 
+        horizontalObjects.Add(train);
+        horizontalObjects.Add(train);
+
         foreach (GameObject spacePrefab in spaceObjectPrefabs)
         {
             Placeable placeable = spacePrefab.GetComponent<Placeable>();
