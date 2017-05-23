@@ -35,7 +35,7 @@ public class OverlayGaze : MonoBehaviour {
             {
                 Debug.Log("Focussed");
                 Vector3 pos = gameObject.transform.position;
-                pos.z = pos.z + 0.01f;
+                pos.z = pos.z + 0.001f;
                 Quaternion q = gameObject.transform.rotation;
                 Instantiate(gazeMenu, pos,q);
 

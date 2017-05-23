@@ -15,8 +15,24 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     public GameObject train;
 
     public List<GameObject> trains = new List<GameObject>();
+    public List<GameObject> overlays = new List<GameObject>();
+
+    private Vector3 minSizeWall = new Vector3();
+
+    private List<GameObject> verticalSurfaces;
 
    
+    public void GenerateWallScreen(List<GameObject> overlays)
+    {
+        foreach(GameObject overlay in overlays)
+        {
+           minSizeWall.x += overlay.GetComponent<Collider>().bounds.size.x;
+           minSizeWall.z += overlay.GetComponent<Collider>().bounds.size.z;
+           minSizeWall.y = overlay.GetComponent<Collider>().bounds.size.y + 0.2f;
+        }
+        CreateSpaceObjects(overlays, verticalSurfaces, PlacementSurfaces.Vertical);
+    }
+
 
     /// <summary>
     /// Generates a collection of Placeable objects in the world and sets them on planes that match their affinity.
@@ -25,6 +41,7 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     /// <param name="verticalSurfaces">Vertical surface planes (walls).</param>
     public void GenerateItemsInWorld(List<GameObject> horizontalSurfaces, List<GameObject> verticalSurfaces)
     {
+        this.verticalSurfaces = verticalSurfaces;
         List<GameObject> horizontalObjects = new List<GameObject>();
         List<GameObject> verticalObjects = new List<GameObject>();
 
@@ -156,11 +173,16 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
         {
             if (usedPlanes.Contains(i))
             {
+                if (isVertical)
+                {
+                    return i;
+                }
+
                 continue;
             }
 
             Collider collider = planes[i].GetComponent<Collider>();
-            if (isVertical && (collider.bounds.size.x < minSize.x || collider.bounds.size.y < minSize.y))
+            if (isVertical && (collider.bounds.size.x < minSizeWall.x || collider.bounds.size.y < minSizeWall.y))
             {
                 // This plane is too small to fit our vertical object.
                 continue;

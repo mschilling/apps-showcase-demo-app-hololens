@@ -371,6 +371,7 @@ MonoBehaviour:
   - {fileID: 1123597841949752, guid: 5132bbbdc3622134ab4fdc441192e9e8, type: 2}
   train: {fileID: 1123597841949752, guid: 5132bbbdc3622134ab4fdc441192e9e8, type: 2}
   trains: []
+  overlays: []
 --- !u!114 &1418181054
 MonoBehaviour:
   m_ObjectHideFlags: 0
