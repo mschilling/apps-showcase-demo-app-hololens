@@ -15,7 +15,7 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     public GameObject train;
 
     public List<GameObject> trains = new List<GameObject>();
-    public List<GameObject> overlays = new List<GameObject>();
+    private List<GameObject> overlays = new List<GameObject>();
 
     private Vector3 minSizeWall = new Vector3();
 
@@ -26,9 +26,9 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     {
         foreach(GameObject overlay in overlays)
         {
-           minSizeWall.x += overlay.GetComponent<Collider>().bounds.size.x;
-           minSizeWall.z += overlay.GetComponent<Collider>().bounds.size.z;
-           minSizeWall.y = overlay.GetComponent<Collider>().bounds.size.y + 0.2f;
+           minSizeWall.x += overlay.GetComponent<Renderer>().bounds.size.x;
+           minSizeWall.z += overlay.GetComponent<Renderer>().bounds.size.z;
+           minSizeWall.y = overlay.GetComponent<Renderer>().bounds.size.y + 0.2f;
         }
         CreateSpaceObjects(overlays, verticalSurfaces, PlacementSurfaces.Vertical);
     }
