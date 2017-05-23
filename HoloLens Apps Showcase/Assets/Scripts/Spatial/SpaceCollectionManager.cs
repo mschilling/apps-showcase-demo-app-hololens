@@ -17,6 +17,8 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     public List<GameObject> trains = new List<GameObject>();
     private List<GameObject> overlays = new List<GameObject>();
 
+    private int itemsPlaced = 0;
+
     private Vector3 minSizeWall = new Vector3();
 
     private List<GameObject> verticalSurfaces;
@@ -135,6 +137,8 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
                 if (surfaceType == PlacementSurfaces.Vertical)
                 {
                     // Vertical objects should face out from the wall.
+                    position.x = -0.5f * itemsPlaced + position.x;
+
                     rotation = Quaternion.LookRotation(surface.transform.forward, Vector3.up);
                 }
                 else
@@ -144,12 +148,15 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
                     rotation.x = 0f;
                     rotation.z = 0f;
                 }
+                
             }
 
             //Vector3 finalPosition = AdjustPositionWithSpatialMap(position, surfaceType);
             GameObject spaceObject = Instantiate(item, position, rotation) as GameObject;
             spaceObject.transform.parent = gameObject.transform;
             trains.Add(spaceObject);
+
+            itemsPlaced += 1;
         }
 
         GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
