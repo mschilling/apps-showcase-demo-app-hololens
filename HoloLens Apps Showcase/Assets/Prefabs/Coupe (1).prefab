@@ -1936,7 +1936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7311e07af8a799a4fb27972628f339f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlay: {fileID: 0}
+  wallOverlay: {fileID: 1959409802343654, guid: d4776e86c09017c428cc4b076e2751b9,
+    type: 2}
 --- !u!136 &136001572180606402
 CapsuleCollider:
   m_ObjectHideFlags: 1
