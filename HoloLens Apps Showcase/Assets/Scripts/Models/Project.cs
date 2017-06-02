@@ -8,13 +8,16 @@ public class Project{
     public float originalX;
     public float x, y, z;
     public GameObject coupe;
+    public AppObject[] apps;
 
 
     public void update()
     {
-
-        coupe.transform.Translate(0.050f, 0, 0);
-        findPath();
+        if (coupe != null)
+        {
+            coupe.transform.Translate(0.050f, 0, 0);
+            findPath();
+        }
     }
 
     public void findPath()

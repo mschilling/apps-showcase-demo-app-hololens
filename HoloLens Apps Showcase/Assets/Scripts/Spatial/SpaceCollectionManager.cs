@@ -12,6 +12,29 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
 {
     [Tooltip("A collection of Placeable space object prefabs to generate in the world.")]
     public List<GameObject> spaceObjectPrefabs;
+    public GameObject train;
+
+    public List<GameObject> trains = new List<GameObject>();
+    private List<GameObject> overlays = new List<GameObject>();
+
+    private int itemsPlaced = 0;
+
+    private Vector3 minSizeWall = new Vector3();
+
+    private List<GameObject> verticalSurfaces;
+
+   
+    public void GenerateWallScreen(List<GameObject> overlays)
+    {
+        foreach(GameObject overlay in overlays)
+        {
+           minSizeWall.x += overlay.GetComponent<Renderer>().bounds.size.x;
+           minSizeWall.z += overlay.GetComponent<Renderer>().bounds.size.z;
+           minSizeWall.y = overlay.GetComponent<Renderer>().bounds.size.y + 0.2f;
+        }
+        CreateSpaceObjects(overlays, verticalSurfaces, PlacementSurfaces.Vertical);
+    }
+
 
     /// <summary>
     /// Generates a collection of Placeable objects in the world and sets them on planes that match their affinity.
@@ -20,8 +43,12 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
     /// <param name="verticalSurfaces">Vertical surface planes (walls).</param>
     public void GenerateItemsInWorld(List<GameObject> horizontalSurfaces, List<GameObject> verticalSurfaces)
     {
+        this.verticalSurfaces = verticalSurfaces;
         List<GameObject> horizontalObjects = new List<GameObject>();
         List<GameObject> verticalObjects = new List<GameObject>();
+
+        horizontalObjects.Add(train);
+        horizontalObjects.Add(train);
 
         foreach (GameObject spacePrefab in spaceObjectPrefabs)
         {
@@ -45,6 +72,11 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
         {
             CreateSpaceObjects(verticalObjects, verticalSurfaces, PlacementSurfaces.Vertical);
         }
+    }
+
+    public List<GameObject> getLocos()
+    {
+        return trains;
     }
 
     /// <summary>
@@ -100,13 +132,23 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
                 SurfacePlane plane = surface.GetComponent<SurfacePlane>();
                 position = surface.transform.position + (plane.PlaneThickness * plane.SurfaceNormal);
                 position = AdjustPositionWithSpatialMap(position, plane.SurfaceNormal);
-                position.y = position.y + 1;
                 rotation = Camera.main.transform.localRotation;
 
                 if (surfaceType == PlacementSurfaces.Vertical)
                 {
                     // Vertical objects should face out from the wall.
+                    Vector3 pos = surface.transform.position;
+
+                    Vector3 forward = surface.transform.forward;
+                    Debug.Log("x " + forward.x);
+                    Debug.Log("z " + forward.z);
+                   
+                    position.z = 0.5f * itemsPlaced * forward.z  + position.z;
+                    position.x = 0.5f * itemsPlaced * forward.x + position.x;
+                   
                     rotation = Quaternion.LookRotation(surface.transform.forward, Vector3.up);
+
+
                 }
                 else
                 {
@@ -115,12 +157,20 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
                     rotation.x = 0f;
                     rotation.z = 0f;
                 }
+                
             }
 
             //Vector3 finalPosition = AdjustPositionWithSpatialMap(position, surfaceType);
             GameObject spaceObject = Instantiate(item, position, rotation) as GameObject;
             spaceObject.transform.parent = gameObject.transform;
+            trains.Add(spaceObject);
+
+            itemsPlaced += 1;
         }
+
+        GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        ApplicationService applicationService = mainCamera.GetComponent<ApplicationService>();
+        applicationService.spatialMappingCompleted();
     }
 
     /// <summary>
@@ -139,11 +189,16 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
         {
             if (usedPlanes.Contains(i))
             {
+                if (isVertical)
+                {
+                    return i;
+                }
+
                 continue;
             }
 
             Collider collider = planes[i].GetComponent<Collider>();
-            if (isVertical && (collider.bounds.size.x < minSize.x || collider.bounds.size.y < minSize.y))
+            if (isVertical && (collider.bounds.size.x < minSizeWall.x || collider.bounds.size.y < minSizeWall.y))
             {
                 // This plane is too small to fit our vertical object.
                 continue;
