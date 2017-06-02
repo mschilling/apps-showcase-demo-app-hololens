@@ -40,10 +40,20 @@ public class OverlayGaze : MonoBehaviour{
             if (focussed == gameObject)
             {
                 Debug.Log("Focussed");
-                
+
+                Debug.Log("x screen " + gameObject.transform.position.x);
+                Debug.Log("y screen " + gameObject.transform.position.y);
+                Debug.Log("z screen " + gameObject.transform.position.z);
+
+
                 Vector3 pos = gameObject.transform.position;
                 Quaternion q = Quaternion.LookRotation(gameObject.transform.forward, Vector3.up);
                 GameObject gaze = Instantiate(gazeMenu, pos,q);
+
+                Debug.Log("x gaa " + gaze.transform.position.x);
+                Debug.Log("y gaa " + gaze.transform.position.y);
+                Debug.Log("z gaa " + gaze.transform.position.z);
+
                 applicationService.changeOverlay(gaze);
                 Project project = applicationService.getProjectByGameObject(gameObject);
 

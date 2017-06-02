@@ -198,7 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e836e8be28b025247b202becca66c8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: 0}
-  mainCamera: {fileID: 0}
-  gazeMenu: {fileID: 1952933420975028, guid: 32512de9edf2c114481fc661964f247a, type: 2}
+  inputManager: {fileID: 1000011070707148, guid: 3eddd1c29199313478dd3f912bfab2ab,
+    type: 2}
+  mainCamera: {fileID: 1000011021619270, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
+  gazeMenu: {fileID: 1690823343915122, guid: 2c2d763898f7281418569afca4794b36, type: 2}
   applicationService: {fileID: 0}
