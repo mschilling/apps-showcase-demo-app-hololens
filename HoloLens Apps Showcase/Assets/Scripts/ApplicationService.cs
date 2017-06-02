@@ -21,6 +21,9 @@ public class ApplicationService : MonoBehaviour {
 
     private GameObject gazedObject = null;                                  // Hold reference to gazedObject to use for devicewall placement
 
+    private GameObject currentOverlay;
+
+
     // Use this for initialization
     void Start () {
         fillCustomers();
@@ -168,27 +171,47 @@ public class ApplicationService : MonoBehaviour {
         gazedObject = gazeObject;
     }
 
-    public void placeApp()
+    public Project getProjectByGameObject(GameObject gameObject)
     {
-        foreach(Customer c in customers)
+        foreach (Customer c in customers)
         {
-            foreach(Project p in c.projects)
+            foreach (Project p in c.projects)
             {
-                if(p.coupe == gazedObject)
+                if (p.coupe == gazedObject)
                 {
-                    // place app
-                    requests[2] = jsonScript.GET(Config.deviceApiUrl, placeAppCallBack);
-
-                    StartCoroutine(WaitForRequest(requests[2], placeAppCallBack));
+                    return p;
                 }
             }
         }
+        return null;
+    }
+
+    public void placeApp()
+    {
+        Project p = getProjectByGameObject(gazedObject);
+                if(p !=null)
+                {
+                    // place app
+                    requests[2] = jsonScript.GET(Config.deviceApiUrl, placeAppCallBack);
+                    StartCoroutine(WaitForRequest(requests[2], placeAppCallBack));
+                }
+         
     }
 
     void placeAppCallBack()
     {
         Application.OpenURL("http://192.168.13.61/7100");
         // feedback to user app is placed;
+    }
+
+
+    public void changeOverlay(GameObject overlay)
+    {
+        if (currentOverlay != null)
+        {
+            Destroy(currentOverlay);
+        }
+        currentOverlay = overlay;
     }
 
     private IEnumerator WaitForRequest(WWW www, System.Action onComplete)

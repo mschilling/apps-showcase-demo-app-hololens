@@ -5,8 +5,9 @@ using UnityEngine;
 
 using UnityEngine.UI;
 using HoloToolkit.Unity.InputModule;
+using HoloToolkit.Unity;
 
-public class OverlayGaze : MonoBehaviour {
+public class OverlayGaze : MonoBehaviour{
 
     private GazeManager gazeManager;
     public GameObject inputManager;
@@ -15,9 +16,12 @@ public class OverlayGaze : MonoBehaviour {
     public GameObject gazeMenu;
     public ApplicationService applicationService;
 
+    private GameObject currentOverlay;
+
 	// Use this for initialization
 	void Start ()
     {
+        
         Debug.Log("Gazemanager: " + (gazeManager != null));
         inputManager = GameObject.FindGameObjectWithTag("InputManager");
         gazeManager = inputManager.GetComponent<GazeManager>();
@@ -36,15 +40,19 @@ public class OverlayGaze : MonoBehaviour {
             if (focussed == gameObject)
             {
                 Debug.Log("Focussed");
+                
                 Vector3 pos = gameObject.transform.position;
                 Quaternion q = Quaternion.LookRotation(gameObject.transform.forward, Vector3.up);
                 GameObject gaze = Instantiate(gazeMenu, pos,q);
+                applicationService.changeOverlay(gaze);
+                Project project = applicationService.getProjectByGameObject(gameObject);
+
                 TextMesh[] texts = gaze.GetComponentsInChildren<TextMesh>();
-                texts[0].text = "Should be changed lel";
-                texts[1].text = "Tekst 2";
+             //   texts[0].text = project.name;
 
                 applicationService.setGazedObject(gameObject);
             }
         }
     }
+
 }
