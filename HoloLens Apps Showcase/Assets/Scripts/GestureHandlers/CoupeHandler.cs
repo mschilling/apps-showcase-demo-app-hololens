@@ -7,6 +7,8 @@ public class CoupeHandler : MonoBehaviour, IInputClickHandler
 {
 
     private bool isDriving = false;
+    public GameObject[] allOverlays;
+
     public GameObject wallOverlay;
 
     private SpaceCollectionManager manager;
@@ -15,6 +17,7 @@ public class CoupeHandler : MonoBehaviour, IInputClickHandler
     {
         GameObject spatial = GameObject.FindGameObjectWithTag("Spatial");
         manager = spatial.GetComponent<SpaceCollectionManager>();
+       
     }
 
     private void Update()
@@ -30,11 +33,16 @@ public class CoupeHandler : MonoBehaviour, IInputClickHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
         Debug.Log("Coupe tapped");
-        Debug.Log(wallOverlay != null);
+        Debug.Log(allOverlays.Length);
         List<GameObject> overlays = new List<GameObject>();
-        overlays.Add(wallOverlay);
-        overlays.Add(wallOverlay);
-        overlays.Add(wallOverlay);
+        foreach(GameObject overlay in allOverlays)
+        {
+            overlays.Add(overlay);
+        }
+        //List<GameObject> overlays = new List<GameObject>();
+        //overlays.Add(wallOverlay);
+        //overlays.Add(wallOverlay);
+        //overlays.Add(wallOverlay);
 
         manager.GenerateWallScreen(overlays);
 

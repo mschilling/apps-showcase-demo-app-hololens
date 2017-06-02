@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+
+using UnityEngine.UI;
 using HoloToolkit.Unity.InputModule;
 
 public class OverlayGaze : MonoBehaviour {
@@ -35,9 +37,11 @@ public class OverlayGaze : MonoBehaviour {
             {
                 Debug.Log("Focussed");
                 Vector3 pos = gameObject.transform.position;
-                pos.z = pos.z + 0.001f;
-                Quaternion q = gameObject.transform.rotation;
-                Instantiate(gazeMenu, pos,q);
+                Quaternion q = Quaternion.LookRotation(gameObject.transform.forward, Vector3.up);
+                GameObject gaze = Instantiate(gazeMenu, pos,q);
+                TextMesh[] texts = gaze.GetComponentsInChildren<TextMesh>();
+                texts[0].text = "Should be changed lel";
+                texts[1].text = "Tekst 2";
 
                 applicationService.setGazedObject(gameObject);
             }

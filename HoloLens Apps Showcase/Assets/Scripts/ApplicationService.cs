@@ -187,6 +187,7 @@ public class ApplicationService : MonoBehaviour {
 
     void placeAppCallBack()
     {
+        Application.OpenURL("http://192.168.13.61/7100");
         // feedback to user app is placed;
     }
 

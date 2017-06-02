@@ -1936,6 +1936,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7311e07af8a799a4fb27972628f339f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allOverlays:
+  - {fileID: 1959409802343654, guid: d4776e86c09017c428cc4b076e2751b9, type: 2}
+  - {fileID: 1366889488325092, guid: e86cf7962940a344ca1e17cd567f773b, type: 2}
+  - {fileID: 1597276883095832, guid: 97988bc2cce8d6944aade6db1f8c1610, type: 2}
+  - {fileID: 1710790845652760, guid: 987b0552890da0d49b1f92f829f88538, type: 2}
+  - {fileID: 1837591078907020, guid: 90dd0dafa64bb0c47ba8c405fe78088e, type: 2}
   wallOverlay: {fileID: 1959409802343654, guid: d4776e86c09017c428cc4b076e2751b9,
     type: 2}
 --- !u!136 &136001572180606402

@@ -138,15 +138,17 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
                 {
                     // Vertical objects should face out from the wall.
                     Vector3 pos = surface.transform.position;
-                    if(pos.x > pos.z)
-                    {
-                        position.z = 0.5f * itemsPlaced + position.z;
-                    }else
-                    {
-                        position.x = -0.5f * itemsPlaced + position.x;
 
-                    }
+                    Vector3 forward = surface.transform.forward;
+                    Debug.Log("x " + forward.x);
+                    Debug.Log("z " + forward.z);
+                   
+                    position.z = 0.5f * itemsPlaced * forward.z  + position.z;
+                    position.x = 0.5f * itemsPlaced * forward.x + position.x;
+                   
                     rotation = Quaternion.LookRotation(surface.transform.forward, Vector3.up);
+
+
                 }
                 else
                 {
