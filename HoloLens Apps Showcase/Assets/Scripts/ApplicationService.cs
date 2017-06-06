@@ -44,6 +44,11 @@ public class ApplicationService : MonoBehaviour {
         }
      }
 
+    public GameObject getTrain()
+    {
+        return train;
+    }
+
     void getData()
     {
         // Coders: 60 / 103
