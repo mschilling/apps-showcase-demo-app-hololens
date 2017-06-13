@@ -51,10 +51,10 @@ public class ApplicationService : MonoBehaviour {
 
     void getData()
     {
-        // Coders: 60 / 103
-        // MyDial Ionic: 12 / 100
-        // Bite:    12 / 92
-        jsonScript = new JsonScript();
+        // Coders:          60 / 103
+        // MyDial Ionic:    12 / 100
+        // Bite:            12 / 92
+        jsonScript = new JsonScript();                                                      // Use script to GET data
         requests[0] = jsonScript.GET(Config.generateAppsurl(12, 92), processData);
         requests[1] = jsonScript.GET(Config.generateAppsurl(12, 100), processSecond);
 
@@ -64,12 +64,12 @@ public class ApplicationService : MonoBehaviour {
 
     void fillCustomers()
     {
-        Customer m4m = new Customer();
-        m4m.name = "Move4Mobile";
-        Customer wildlands = new Customer();
-        wildlands.name = "Wildlands";
-        Customer rabo = new Customer();
-        rabo.name = "Rabobank";
+        Customer m4m        = new Customer();
+        m4m.name            = "Move4Mobile";
+        Customer wildlands  = new Customer();
+        wildlands.name      = "Wildlands";
+        Customer rabo       = new Customer();
+        rabo.name           = "Rabobank";
 
         customers[0] = m4m;
         customers[1] = wildlands;
@@ -89,12 +89,12 @@ public class ApplicationService : MonoBehaviour {
         // M4M Projects
         Project[] m4mprojects = new Project[3];
 
-        Project bite = new Project();
-        bite.name = "Bite";
-        Project coders = new Project();
-        coders.name = "Coders";
+        Project bite        = new Project();
+        bite.name           = "Bite";
+        Project coders      = new Project();
+        coders.name         = "Coders";
         Project mydialionic = new Project();
-        mydialionic.name = "MyDialogues Ionic";
+        mydialionic.name    = "MyDialogues Ionic";
 
         m4mprojects[0] = bite;
         m4mprojects[1] = coders;
@@ -105,16 +105,19 @@ public class ApplicationService : MonoBehaviour {
         // Rabo Projects
         Project[] raboProjects = new Project[1];
 
-        Project smartpin = new Project();
-        smartpin.name = "Rabo SmartPin";
-        raboProjects[0] = smartpin;
+        Project smartpin    = new Project();
+        smartpin.name       = "Rabo SmartPin";
+
+        raboProjects[0]     = smartpin;
 
         customers[1].projects = raboProjects;
 
         // Wildlands 
         Project[] wildlandProjects = new Project[1];
-        Project wildlands = new Project();
-        wildlands.name = "Wildlands";
+
+        Project wildlands   = new Project();
+        wildlands.name      = "Wildlands";
+
         wildlandProjects[0] = wildlands;
 
         customers[2].projects = wildlandProjects;
@@ -135,7 +138,7 @@ public class ApplicationService : MonoBehaviour {
     void startProcess(int index)
     {
         Debug.Log(requests[index].text);
-        AppObject[] apps = jsonScript.getJsonArray(requests[index].text);
+        AppObject[] apps = jsonScript.getJsonArray(requests[index].text);                   // Convert apps from json input
         switch (index)
         {
             case 0:
@@ -156,17 +159,21 @@ public class ApplicationService : MonoBehaviour {
     public void spatialMappingCompleted()
     {
         GameObject spatial = GameObject.FindGameObjectWithTag("Spatial");
-        SpaceCollectionManager manager = spatial.GetComponent<SpaceCollectionManager>();
+        SpaceCollectionManager manager = spatial.GetComponent<SpaceCollectionManager>();                // Get collection manager
         locos = manager.getLocos().ToArray();
 
         Vector3 posLoco = locos[0].transform.position;
 
+
         Quaternion quat = locos[0].transform.rotation;
         for (int i = 0; i < treintjes[0].Length; i++)
         {
-            Vector3 pos = new Vector3(-0.5f * i - 0.5f + posLoco.x, 0.04f + posLoco.y, 0 + posLoco.z);
-            treintjes[0][i] = Instantiate(coupe, pos, quat);
+            Vector3 customPos = locos[0].transform.TransformPoint(new Vector3(-4.5f*(i+1), 0, 0));
+
+            treintjes[0][i] = Instantiate(coupe, customPos, quat);
         }
+
+
         isLoaded = true;
 
     }

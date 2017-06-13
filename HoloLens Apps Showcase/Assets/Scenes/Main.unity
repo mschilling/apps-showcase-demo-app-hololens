@@ -200,6 +200,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1448991615655180, guid: 75e6b74fa406bb0498543d6620fef83c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 75e6b74fa406bb0498543d6620fef83c, type: 2}
   m_IsPrefabParent: 0
@@ -247,6 +251,11 @@ Prefab:
       propertyPath: MaxFrameTime
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013027790266, guid: d41fa7615c3c85b40bcc95fc4367b607,
+        type: 2}
+      propertyPath: MeshMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: ddc2ff62e97ce6d41991784c3aa8e233, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d41fa7615c3c85b40bcc95fc4367b607, type: 2}
   m_IsPrefabParent: 0
@@ -318,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6826ab81aaa4ea45977a247a0961f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coupe: {fileID: 1365721188274110, guid: 1c4e59303270a3c45a601fe1fe3dc84f, type: 2}
+  coupe: {fileID: 1363834716319698, guid: 1c4e59303270a3c45a601fe1fe3dc84f, type: 2}
   train: {fileID: 1123597841949752, guid: 5132bbbdc3622134ab4fdc441192e9e8, type: 2}
 --- !u!1001 &1239255867
 Prefab:

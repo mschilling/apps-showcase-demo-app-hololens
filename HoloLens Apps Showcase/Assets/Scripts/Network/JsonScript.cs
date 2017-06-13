@@ -48,7 +48,6 @@ public class JsonScript {
     public WWW GET(string url, System.Action onComplete)
     {
         Dictionary<string, string> headers = new Dictionary<string, string>();
-        headers.Add("Authorization", "los4kss5kl3b73pn8evhiieg2c");
         WWW www = new WWW(url, null, headers);
         return www;
     }
