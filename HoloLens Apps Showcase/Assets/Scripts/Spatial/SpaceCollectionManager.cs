@@ -142,17 +142,11 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
                     Vector3 forward = surface.transform.forward;
                     Debug.Log("x " + forward.x);
                     Debug.Log("z " + forward.z);
-                   
                   
-                   
                     rotation = Quaternion.LookRotation(surface.transform.forward, Vector3.up);
-
-                    position.z = 0.25f * (itemsPlaced / forward.z) + position.z;
-                    position.x = 0.25f * (itemsPlaced / forward.x) + position.x;
+                    position = surface.transform.TransformPoint(0,0.5f * itemsPlaced ,0);
 
                     Debug.Log("x " + position.x + " y " + position.y + " z " + position.z);
-
-
                 }
                 else
                 {
