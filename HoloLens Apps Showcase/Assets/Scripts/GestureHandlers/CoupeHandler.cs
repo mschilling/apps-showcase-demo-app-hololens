@@ -17,7 +17,6 @@ public class CoupeHandler : MonoBehaviour, IInputClickHandler
     {
         GameObject spatial = GameObject.FindGameObjectWithTag("Spatial");
         manager = spatial.GetComponent<SpaceCollectionManager>();
-       
     }
 
     private void Update()

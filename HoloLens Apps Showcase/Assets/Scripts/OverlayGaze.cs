@@ -41,11 +41,6 @@ public class OverlayGaze : MonoBehaviour{
             {
                 Debug.Log("Focussed");
 
-                Debug.Log("x screen " + gameObject.transform.position.x);
-                Debug.Log("y screen " + gameObject.transform.position.y);
-                Debug.Log("z screen " + gameObject.transform.position.z);
-
-
                 Vector3 pos = gameObject.transform.position;
                 Quaternion q = Quaternion.LookRotation(gameObject.transform.forward, Vector3.up);
                 GameObject gaze = Instantiate(gazeMenu, pos,q);
@@ -58,7 +53,7 @@ public class OverlayGaze : MonoBehaviour{
                 Project project = applicationService.getProjectByGameObject(gameObject);
 
                 TextMesh[] texts = gaze.GetComponentsInChildren<TextMesh>();
-             //   texts[0].text = project.name;
+                 texts[0].text = project.name;
 
                 applicationService.setGazedObject(gameObject);
             }
