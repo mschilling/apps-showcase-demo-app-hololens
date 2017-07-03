@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
+using HoloToolkit.Unity;
 
 public class ApplicationService : MonoBehaviour {
 
@@ -23,15 +24,36 @@ public class ApplicationService : MonoBehaviour {
 
     private GameObject currentOverlay;
 
+    private TextToSpeechManager textToSpeechManager;
+
+    private TextUtil textUtil = new TextUtil();
+   
+
+    private enum SCENE { Menu, Settings, Mapping, Overview, Apps, Overlay};
+
+    private SCENE currentScene = SCENE.Menu;
+
+    private bool saidStartedScanning = false;
+
 
     // Use this for initialization
     void Start () {
         fillCustomers();
         getData();
+
+
     }
 
     // Update is called once per frame
     void Update () {
+        if (!saidStartedScanning)
+        {
+            textToSpeechManager = new TextToSpeechManager();
+            textToSpeechManager.SpeakText(textUtil.tapToEnd);
+
+            saidStartedScanning = true;
+        }
+
         if (isLoaded)
         {
            foreach(Customer c in customers)
@@ -176,7 +198,21 @@ public class ApplicationService : MonoBehaviour {
 
         isLoaded = true;
 
+        currentScene = SCENE.Overview;
+
     }
+
+    public void GoBack()
+    {
+        currentScene -= 1;
+    }
+
+    public void GoToNext()
+    {
+        currentScene += 1;
+    }
+
+
     public void setGazedObject(GameObject gazeObject)
     {
         Debug.Log("GazeObject changed at ApplicationService");

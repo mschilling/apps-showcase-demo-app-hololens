@@ -6,6 +6,8 @@ using HoloToolkit.Unity.InputModule;
 public class SettingsClick : MonoBehaviour, IInputClickHandler
 {
 
+    public GameObject settingsMenu;
+
     // Use this for initialization
     void Start()
     {
@@ -15,6 +17,7 @@ public class SettingsClick : MonoBehaviour, IInputClickHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
         Debug.Log("Settings tapped");
+        Instantiate(settingsMenu);
         // Go on
     }
 
