@@ -38,7 +38,7 @@ public class ApplicationService : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        fillCustomers();
+       // fillCustomers();
         getData();
 
 
@@ -48,7 +48,7 @@ public class ApplicationService : MonoBehaviour {
     void Update () {
         if (!saidStartedScanning)
         {
-            textToSpeechManager = new TextToSpeechManager();
+            textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
             textToSpeechManager.SpeakText(textUtil.tapToEnd);
 
             saidStartedScanning = true;
@@ -84,7 +84,7 @@ public class ApplicationService : MonoBehaviour {
         StartCoroutine(WaitForRequest(requests[1], processSecond));
     }
 
-    void fillCustomers()
+    public void fillCustomers()
     {
         Customer m4m        = new Customer();
         m4m.name            = "Move4Mobile";

@@ -19,6 +19,10 @@ public class StartClick : MonoBehaviour, IInputClickHandler
         // Go on
         Instantiate(spatial);
         Destroy(gameObject.transform.parent.gameObject);
+
+        GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        ApplicationService applicationService = mainCamera.GetComponent<ApplicationService>();
+        applicationService.fillCustomers();
     }
 
     // Update is called once per frame

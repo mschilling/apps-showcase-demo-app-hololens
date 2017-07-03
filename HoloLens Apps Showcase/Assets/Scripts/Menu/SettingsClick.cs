@@ -17,6 +17,8 @@ public class SettingsClick : MonoBehaviour, IInputClickHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
         Debug.Log("Settings tapped");
+      //  gameObject.transform.parent.gameObject.GetComponent<Renderer>().enabled = false;
+
         Instantiate(settingsMenu);
         // Go on
     }

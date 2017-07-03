@@ -17,6 +17,11 @@ public class CloseClick : MonoBehaviour, IInputClickHandler
     public void OnInputClicked(InputClickedEventData eventData)
     {
         Debug.Log("Close tapped");
+
+      
+
+        gameObject.transform.parent.gameObject.SetActive(false);
+
         // Go on
     }
 
