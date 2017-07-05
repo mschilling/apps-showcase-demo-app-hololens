@@ -29,9 +29,9 @@ public class ApplicationService : MonoBehaviour {
     private TextUtil textUtil = new TextUtil();
    
 
-    private enum SCENE { Menu, Settings, Mapping, Overview, Apps, Overlay};
+    public enum SCENE { Menu, Settings, Mapping, Overview, Apps, Overlay};
 
-    private SCENE currentScene = SCENE.Menu;
+    public SCENE currentScene = SCENE.Menu;
 
     private bool saidStartedScanning = false;
 
@@ -40,20 +40,10 @@ public class ApplicationService : MonoBehaviour {
     void Start () {
        // fillCustomers();
         getData();
-
-
     }
 
     // Update is called once per frame
     void Update () {
-        if (!saidStartedScanning)
-        {
-            textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
-            textToSpeechManager.SpeakText(textUtil.tapToEnd);
-
-            saidStartedScanning = true;
-        }
-
         if (isLoaded)
         {
            foreach(Customer c in customers)
@@ -143,6 +133,13 @@ public class ApplicationService : MonoBehaviour {
         wildlandProjects[0] = wildlands;
 
         customers[2].projects = wildlandProjects;
+
+        textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
+        textToSpeechManager.SpeakText(textUtil.tapToEnd);
+
+        currentScene = SCENE.Overview;
+
+        saidStartedScanning = true;
     }
 
 
@@ -188,17 +185,28 @@ public class ApplicationService : MonoBehaviour {
 
 
         Quaternion quat = locos[0].transform.rotation;
-        for (int i = 0; i < treintjes[0].Length; i++)
+        if (treintjes[0] != null)
         {
-            Vector3 customPos = locos[0].transform.TransformPoint(new Vector3(-4.5f*(i+1), 0, 0));
 
-            treintjes[0][i] = Instantiate(coupe, customPos, quat);
+            for (int i = 0; i < treintjes[0].Length; i++)
+            {
+                Vector3 customPos = locos[0].transform.TransformPoint(new Vector3(-4.5f * (i + 1), 0, 0));
+
+                treintjes[0][i] = Instantiate(coupe, customPos, quat);
+            }
         }
 
 
         isLoaded = true;
 
         currentScene = SCENE.Overview;
+       
+        textToSpeechManager.SpeakText(textUtil.trainPlaced);
+
+        GameObject surfacePlanes = GameObject.Find("SpatialUnderstanding");
+        Destroy(surfacePlanes);
+
+       
 
     }
 

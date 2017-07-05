@@ -7,7 +7,7 @@ public class TextUtil {
     public string welcomeMessage= "Tap to start scanning";
     public string tapToEnd = "Tap to complete scanning";
     public string scanningCompleted = "Scanning completed";
-
+    public string trainPlaced = "Train placed";
 
 	
 }

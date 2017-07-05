@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HoloToolkit.Unity;
 using System;
 
 public class GestureSelection : MonoBehaviour, IInputClickHandler {
 
-    public PlaySpaceManager playSpaceManager;
+    private PlaySpaceManager playSpaceManager;
     public InputManager input;
     
     // Use this for initialization
@@ -16,11 +17,21 @@ public class GestureSelection : MonoBehaviour, IInputClickHandler {
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        Debug.Log("Clicked!");
-
-        if (!playSpaceManager.finishedScanning())
+        GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        ApplicationService applicationService = mainCamera.GetComponent<ApplicationService>();
+        if(applicationService.currentScene == ApplicationService.SCENE.Overview)
         {
-            playSpaceManager.finishScanning();
+            playSpaceManager = GameObject.FindGameObjectWithTag("Spatial").GetComponent<PlaySpaceManager>();
+            Debug.Log("Clicked!");
+
+            if (!playSpaceManager.finishedScanning())
+            {
+                playSpaceManager.finishScanning();
+            }
+            TextToSpeechManager textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
+            textToSpeechManager.SpeakText(new TextUtil().scanningCompleted);
         }
+
+       
     }
 }
