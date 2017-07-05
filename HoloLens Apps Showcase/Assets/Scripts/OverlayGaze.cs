@@ -52,8 +52,15 @@ public class OverlayGaze : MonoBehaviour{
                 applicationService.changeOverlay(gaze);
                 Project project = applicationService.getProjectByGameObject(gameObject);
 
+                if(gaze == null)
+                {
+                    Debug.Log("Gaze is null");
+                }
                 TextMesh[] texts = gaze.GetComponentsInChildren<TextMesh>();
-                 texts[0].text = project.name;
+                if (texts != null && texts.Length > 0 && project != null)
+                {
+                    texts[0].text = project.name;
+                }
 
                 applicationService.setGazedObject(gameObject);
             }

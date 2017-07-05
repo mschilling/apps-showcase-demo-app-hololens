@@ -38,7 +38,7 @@ public class ApplicationService : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-       // fillCustomers();
+        fillCustomers();
         getData();
     }
 
@@ -89,11 +89,16 @@ public class ApplicationService : MonoBehaviour {
 
 
         // Create 3 trains
+       
+
+        fillProjects();
+    }
+
+    public void getLocos()
+    {
         GameObject spatial = GameObject.FindGameObjectWithTag("Spatial");
         SpaceCollectionManager manager = spatial.GetComponent<SpaceCollectionManager>();
         locos = manager.getLocos().ToArray();
-
-        fillProjects();
     }
 
     void fillProjects()

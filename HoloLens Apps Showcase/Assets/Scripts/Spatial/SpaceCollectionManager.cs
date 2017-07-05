@@ -48,7 +48,7 @@ public class SpaceCollectionManager : Singleton<SpaceCollectionManager>
         List<GameObject> verticalObjects = new List<GameObject>();
 
         horizontalObjects.Add(train);
-        horizontalObjects.Add(train);
+       // horizontalObjects.Add(train);
 
         foreach (GameObject spacePrefab in spaceObjectPrefabs)
         {

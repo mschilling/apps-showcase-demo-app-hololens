@@ -22,7 +22,7 @@ public class StartClick : MonoBehaviour, IInputClickHandler
 
         GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         ApplicationService applicationService = mainCamera.GetComponent<ApplicationService>();
-        applicationService.fillCustomers();
+        applicationService.getLocos();
     }
 
     // Update is called once per frame
