@@ -99,6 +99,11 @@ public class ApplicationService : MonoBehaviour {
         GameObject spatial = GameObject.FindGameObjectWithTag("Spatial");
         SpaceCollectionManager manager = spatial.GetComponent<SpaceCollectionManager>();
         locos = manager.getLocos().ToArray();
+
+        textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
+        textToSpeechManager.SpeakText(textUtil.tapToEnd);
+        currentScene = SCENE.Overview;
+
     }
 
     void fillProjects()
@@ -139,10 +144,8 @@ public class ApplicationService : MonoBehaviour {
 
         customers[2].projects = wildlandProjects;
 
-        textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
-        textToSpeechManager.SpeakText(textUtil.tapToEnd);
+       
 
-        currentScene = SCENE.Overview;
 
         saidStartedScanning = true;
     }
@@ -261,7 +264,7 @@ public class ApplicationService : MonoBehaviour {
 
     void placeAppCallBack()
     {
-        Application.OpenURL("http://192.168.13.61/7100");
+        Application.OpenURL("http://192.168.13.148:7100");
         // feedback to user app is placed;
     }
 

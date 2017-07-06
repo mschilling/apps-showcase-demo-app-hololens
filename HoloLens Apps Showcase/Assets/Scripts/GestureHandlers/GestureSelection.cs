@@ -27,9 +27,10 @@ public class GestureSelection : MonoBehaviour, IInputClickHandler {
             if (!playSpaceManager.finishedScanning())
             {
                 playSpaceManager.finishScanning();
+                TextToSpeechManager textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
+                textToSpeechManager.SpeakText(new TextUtil().scanningCompleted);
             }
-            TextToSpeechManager textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
-            textToSpeechManager.SpeakText(new TextUtil().scanningCompleted);
+          
         }
 
        

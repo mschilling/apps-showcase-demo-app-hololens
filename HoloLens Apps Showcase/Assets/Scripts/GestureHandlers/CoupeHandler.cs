@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
+using HoloToolkit.Unity;
+
 
 public class CoupeHandler : MonoBehaviour, IInputClickHandler
 {
@@ -44,6 +46,9 @@ public class CoupeHandler : MonoBehaviour, IInputClickHandler
         //overlays.Add(wallOverlay);
 
         manager.GenerateWallScreen(overlays);
+
+        TextToSpeechManager textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
+        textToSpeechManager.SpeakText("Apps placed");
 
         // Show all overlays
     }
