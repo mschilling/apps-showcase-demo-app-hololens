@@ -21,15 +21,12 @@ public class OverlayGaze : MonoBehaviour{
 	// Use this for initialization
 	void Start ()
     {
-        
-        Debug.Log("Gazemanager: " + (gazeManager != null));
         inputManager = GameObject.FindGameObjectWithTag("InputManager");
         gazeManager = inputManager.GetComponent<GazeManager>();
 
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         applicationService = mainCamera.GetComponent<ApplicationService>();
 
-        Debug.Log("Gazemanager: " + (gazeManager != null));
 	}
 	
 	// Update is called once per frame
@@ -37,32 +34,25 @@ public class OverlayGaze : MonoBehaviour{
         if (gazeManager.IsGazingAtObject)
         {
             GameObject focussed = gazeManager.HitObject;
-            if (focussed == gameObject)
+            if (focussed == gameObject && applicationService.getGaze() != focussed)
             {
-                Debug.Log("Focussed");
-
                 Vector3 pos = gameObject.transform.position;
                 Quaternion q = Quaternion.LookRotation(gameObject.transform.forward, Vector3.up);
-                GameObject gaze = Instantiate(gazeMenu, pos,q);
+                GameObject gaze = Instantiate(gazeMenu, pos, q);
 
-                Debug.Log("x gaa " + gaze.transform.position.x);
-                Debug.Log("y gaa " + gaze.transform.position.y);
-                Debug.Log("z gaa " + gaze.transform.position.z);
 
+                // Change overlay and gazed object
                 applicationService.changeOverlay(gaze);
-                Project project = applicationService.getProjectByGameObject(gameObject);
+                applicationService.setGazedObject(gameObject);
 
-                if(gaze == null)
-                {
-                    Debug.Log("Gaze is null");
-                }
+
+                Project project = applicationService.getProjectByGameObject(gameObject);
                 TextMesh[] texts = gaze.GetComponentsInChildren<TextMesh>();
                 if (texts != null && texts.Length > 0 && project != null)
                 {
                     texts[0].text = project.name;
                 }
 
-                applicationService.setGazedObject(gameObject);
             }
         }
     }

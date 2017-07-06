@@ -30,7 +30,8 @@ public class GestureSelection : MonoBehaviour, IInputClickHandler {
                 TextToSpeechManager textToSpeechManager = GameObject.FindGameObjectWithTag("Speech").GetComponent<TextToSpeechManager>();
                 textToSpeechManager.SpeakText(new TextUtil().scanningCompleted);
             }
-          
+
+            input.RemoveGlobalListener(gameObject);
         }
 
        

@@ -29,7 +29,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1963187920038028
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,5 +201,5 @@ MonoBehaviour:
   inputManager: {fileID: 1000011070707148, guid: 3eddd1c29199313478dd3f912bfab2ab,
     type: 2}
   mainCamera: {fileID: 1000011021619270, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
-  gazeMenu: {fileID: 1690823343915122, guid: 2c2d763898f7281418569afca4794b36, type: 2}
+  gazeMenu: {fileID: 1294622113951600, guid: 2c2d763898f7281418569afca4794b36, type: 2}
   applicationService: {fileID: 0}

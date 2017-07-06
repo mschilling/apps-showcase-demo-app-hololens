@@ -25,7 +25,6 @@ public class ApplicationService : MonoBehaviour {
     private GameObject currentOverlay;
 
     private TextToSpeechManager textToSpeechManager;
-
     private TextUtil textUtil = new TextUtil();
    
 
@@ -143,10 +142,6 @@ public class ApplicationService : MonoBehaviour {
         wildlandProjects[0] = wildlands;
 
         customers[2].projects = wildlandProjects;
-
-       
-
-
         saidStartedScanning = true;
     }
 
@@ -164,7 +159,6 @@ public class ApplicationService : MonoBehaviour {
 
     void startProcess(int index)
     {
-        Debug.Log(requests[index].text);
         AppObject[] apps = jsonScript.getJsonArray(requests[index].text);                   // Convert apps from json input
         switch (index)
         {
@@ -204,18 +198,13 @@ public class ApplicationService : MonoBehaviour {
             }
         }
 
-
         isLoaded = true;
-
         currentScene = SCENE.Overview;
        
         textToSpeechManager.SpeakText(textUtil.trainPlaced);
 
         GameObject surfacePlanes = GameObject.Find("SpatialUnderstanding");
         Destroy(surfacePlanes);
-
-       
-
     }
 
     public void GoBack()
@@ -233,6 +222,7 @@ public class ApplicationService : MonoBehaviour {
     {
         Debug.Log("GazeObject changed at ApplicationService");
         gazedObject = gazeObject;
+        placeApp();
     }
 
     public Project getProjectByGameObject(GameObject gameObject)
@@ -252,20 +242,32 @@ public class ApplicationService : MonoBehaviour {
 
     public void placeApp()
     {
+        textToSpeechManager.SpeakText("Installing app to devicewall");
         Project p = getProjectByGameObject(gazedObject);
                 if(p !=null)
                 {
                     // place app
                     requests[2] = jsonScript.GET(Config.deviceApiUrl, placeAppCallBack);
                     StartCoroutine(WaitForRequest(requests[2], placeAppCallBack));
-                }
+        }else
+        {
+            requests[2] = jsonScript.GET(Config.deviceApiUrl, placeAppCallBack);
+            StartCoroutine(WaitForRequest(requests[2], placeAppCallBack));
+        }
          
     }
 
     void placeAppCallBack()
     {
+
         Application.OpenURL("http://192.168.13.148:7100");
         // feedback to user app is placed;
+    }
+
+
+    public GameObject getGaze()
+    {
+        return gazedObject;
     }
 
 
